@@ -22,11 +22,19 @@ export default function Autenticacao(){
         try{
 
             if(modo === 'login'){
-               await login(email, senha)
+               if (login) {
+                   await login(email, senha)
+               } else {
+                   exibirErro('Função de login não está definida')
+               }
             }else{
-                 await cadastrar(email, senha)
+               if (cadastrar) {
+                   await cadastrar(email, senha)
+               } else {
+                   exibirErro('Função de cadastro não está definida')
+               }
             }
-        }catch(e){
+        }catch(e: any){
             exibirErro(e?.message ?? 'Erro desconhecido')
         }
 
